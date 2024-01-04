@@ -24,7 +24,24 @@ public class Driver {
 
     }
     public static WebDriver getDriver(){
-        if(driver == null){
+
+        String jenkinsHome = System.getenv("JENKINS_HOME");
+
+        if (jenkinsHome != null && !jenkinsHome.isEmpty()) {
+
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options1 = new ChromeOptions();
+            options1.addArguments("--window-size=1920,1080");
+            options1.addArguments("--disable-extensions");
+            options1.setExperimentalOption("useAutomationExtension", false);
+            options1.addArguments("--proxy-sever='direct://'");
+            options1.addArguments("--proxy-bypass-list=*");
+            options1.addArguments("--start-maximized");
+            options1.addArguments("--headless");
+            driver = new ChromeDriver(options1);
+
+        } else if
+        (driver == null){
             String browser = ConfigReader.getPropertiesValeu("digitalbank.browser");
         switch(browser.toLowerCase()){
             case "chrome":
