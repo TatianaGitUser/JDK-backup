@@ -1,0 +1,1578 @@
+20.2 Intro to SQL: SELECT
+
+Video lecture code:
+
+
+-- SQL is a standardized programming language used for managing and manipulating relational databases.
+
+-- It serves as a powerful tool for data professionals in various domains and is based on plain English.
+SQL is known for its user-friendly syntax.
+
+-- SQL is designed for the following tasks: data retrieval, insertion, updating, and deletion,
+as well as the definition and modification of database schemas (structures).
+
+-- SQL serves as the standard language for interacting with popular relational DB solutions such as MySQL,
+PostgreSQL, Oracle, Microsoft SQL Server, SQLite and others.
+
+
+-- To execute SQL code, you have to write a query.
+
+--A query is essentially a command or a question you ask the database to retrieve specific information
+or perform certain actions on the stored data.
+
+
+CREATE TABLE Employee (
+first_name TEXT,
+last_name TEXT,
+department TEXT,
+salary INTEGER(10, 2)
+);
+
+INSERT INTO Employee (first_name, last_name, department, salary)
+
+VALUES
+
+('Elon', 'Musk', 'CEO', 1000000.00),
+('Jeff', 'Bezos', 'CFO', 900000.50),
+('Mark', 'Zuckerberg', 'CTO', 850000.75),
+('Tim', 'Cook', 'VP of Sales', 800000.25),
+('Satya', 'Nadella', 'VP of Marketing', 750000.00);
+
+
+
+In relational databases, a table is a fundamental database object used to store and organize data.
+Each table is like a separate sheet for a specific type of data, like a list of customer records.
+
+To interact with database tables, we use Structured Query Language. SQL is a standardized programming
+language used for managing and manipulating relational databases. It serves as a powerful tool for data
+professionals in various domains and is based on plain English. SQL is known for its user-friendly syntax.
+
+Let’s begin with a fundamental SELECT statement. SELECT allows you to retrieve data from a table.
+
+Syntax:
+
+SELECT * FROM table;
+
+Example:
+
+SELECT * FROM Employee;
+
+In the example above, the keyword SELECT is followed by an asterisk *, which means "all columns".
+FROM is a keyword that tells the database where to look for the data. "Customer" is the table name in
+this example.
+
+To retrieve data for specific columns, simply type in the column names after SELECT keyword like in the
+example below:
+
+SELECT first_name, last_name FROM Employee
+
+As a result, you can only view the records under columns first name and last name.
+
+
+20.4 WHERE clause
+
+Video lecture code:
+
+
+CREATE TABLE Employee (
+first_name TEXT,
+last_name TEXT,
+department TEXT,
+salary INTEGER(10, 2)
+);
+
+INSERT INTO Employee (first_name, last_name, department, salary)
+
+VALUES
+
+('Elon', 'Musk', 'CEO', 1000000.00),
+('Jeff', 'Bezos', 'CFO', 900000.50),
+('Mark', 'Zuckerberg', 'CTO', 850000.75),
+('Tim', 'Cook', 'VP of Sales', 800000.25),
+('Satya', 'Nadella', 'VP of Marketing', 750000.00);
+
+CREATE TABLE Client (
+first_name TEXT,
+last_name TEXT,
+email TEXT,
+phone_number TEXT,
+age INT
+);
+
+INSERT INTO Client (first_name, last_name, email, phone_number, age)
+
+VALUES
+
+('John', 'Doe', 'john@example.com', '+1 (123) 456-7890', 20),
+('Jane', 'Smith', 'jane@example.com', '+1 (987) 654-3210', 19),
+('Michael', 'Brown', 'michael@example.com', '+1 (555) 555-5555', 35),
+('Saiid', 'Kadyrkul', 'saiid@example.com', '+1 (777) 123-4567', 17),
+('Anton', 'Ivanov', 'anton@example.com', '+1 (888) 987-6543', 40);
+
+
+
+-- SELECT * FROM table WHERE condition
+
+
+Database Concept
+
+
+A database is a structured and organized collection of data or information that is designed for efficient
+retrieval, management, and analysis.
+
+Databases are essential tools in information management, enabling efficient data storage and retrieval
+in a structured and systematic manner.
+
+
+The purpose of the DBs is to facilitate the retrieval of answers to questions (reports) and the
+development of ideas through data collection.
+
+
+Relational Database
+
+In relational databases, tables are connected through relationships. The relationships are usually
+established following a contextual logic. For example, table “student” is related to table “campus”.
+It can also relate to tables such as “class”, “subject”, “book”, etc. Depending on database design and
+needs, the room for tables that store specific records is endless.
+
+
+In terms of technical implementation, the relationships are established through the keys: Primary Key and
+Foreign Key. The keys are supported by referential integrity. We will learn more about relationships in
+our next lectures.
+
+
+SQL Recap
+
+
+SQL is a standardized programming language used for managing and manipulating relational databases.
+It serves as a powerful tool for data professionals in various domains and is based on plain English.
+SQL is known for its user-friendly syntax.
+
+SQL is designed for the following tasks: data retrieval, insertion, updating, and deletion, as well as
+the definition and modification of database schemas (structures). SQL serves as the standard language
+for interacting with popular relational DB solutions such as MySQL, PostgreSQL, Oracle, Microsoft SQL
+Server, SQLite and others.
+
+
+To execute SQL code, you have to write a query. A query is essentially a command or a question you ask the
+database to retrieve specific information or perform certain actions on the stored data. Queries are like
+conversations with the database, where you express your requirements, and the database responds with the
+relevant data or actions.
+
+
+In the previous lessons, we already learned about query with SELECT statement. Let's take it to the next
+level with the WHERE clause.
+
+
+WHERE clause
+
+
+The WHERE clause is a fundamental component of SQL that is used to retrieve specific rows from a table.
+WHERE allows us to write a query based on certain conditions or criteria. Essentially, it acts as a
+filter that you can modify.
+
+
+Syntax:
+
+
+SELECT * FROM table WHERE condition;
+
+
+
+Note: comparison operator = is used to check if the records match a given value.
+
+
+SELECT * FROM customer WHERE age = 25;
+
+
+The query above returns all rows that have value 25 under column age.
+
+Let’s think of more interesting use cases. Oftentimes, we want to identify similarities in tables to
+explore common patterns. Imagine, we want to get all customers whose last name is Smith, which is a
+very popular last name. Here’s the query:
+
+
+SELECT * FROM customer WHERE last_name = ‘Smith’;
+
+
+The query above returns all rows that have value Smith under column last_name.
+
+
+With WHERE, you can specify more than one condition. For example, we need to retrieve transaction
+records for specific amount and specific date.
+
+
+Note: to add one more condition we use comparison logical operator AND. We will learn about logical
+operators more in the next lectures.
+
+
+SELECT * FROM transaction WHERE amount = 500 AND date = ‘2022-12-31’;
+
+
+The query above returns all rows that have value 500 under column amount and 2022-12-31 under column date.
+
+
+Similarly, we can retrieve records from table Customer with the conditions from both of the first
+two examples. Here’s a query
+
+SELECT * FROM Customer WHERE last_name = ‘Smith’ AND age = 25;
+
+The query above returns all rows that have value 25 under column age and Smith under column last_name.
+=======================================================================================================
+
+20.5 Create Tables and Insert Queries
+
+Video lecture code:
+
+-- Syntax:
+
+CREATE TABLE table_name (
+
+    column1,
+
+    column2,
+
+    column3,
+
+);
+
+CREATE TABLE Employee (
+
+    first_name,
+
+    last_name,
+
+    salary,
+
+);
+
+--Data Types:
+
+
+--INTEGER
+
+--REAL
+
+--TEXT
+
+--DATE
+
+--TIME
+
+--BLOB
+
+--ANY
+
+CREATE TABLE table_name (
+
+    column1 datatype,
+
+    column2 datatype,
+
+    column3 datatype,
+
+);
+
+/*
+
+Employee:
+
+employee_id,
+
+first_name,
+
+last_name,
+
+title,
+
+salary,
+
+date_of_birth,
+
+age
+
+Project:
+
+project_id,
+
+project_name,
+
+project_start,
+
+project_end
+
+*/
+
+Database Table
+
+As stated in the first lecture, in the context of relational databases, tables serve as fundamental
+database objects designed for the storage and organization of data. Think of each table as an isolated
+sheet for a particular category of information.
+
+Each table in RDBs (relational databases) is two-dimensional because it is arranged into a grid-like
+format. This structure consists of rows, which represent individual data records, and columns, which
+represent attributes or properties related to those records.
+
+For example, table Employee is designed to store employee records. The employee records themselves are
+the rows and the properties such as first_name, last_name, age, and salary are the columns.
+
+
+Table Employee
+
+first_name | last_name | age | salary
+John | Doe | 25 | 80000
+Alex | Brown |32 | 95000
+Angela | Wong | 45 | 140000
+Brittany | Joseph | 22 | 60000
+
+Data Type
+
+A data type in the context of databases refers to what type of data a particular column in a database
+can hold. Data types define whether the data is numeric, textual, a date, or something else.
+This classification is essential for proper data storage, organization, and processing.
+
+INT
+Integer
+Real
+TEXT
+BLOB
+ANY
+
+
+Integer: stores whole numbers (e.g., 42, -10).
+
+Decimal : represents fixed-point numbers with a specified precision (e.g., 3.14, -0.005).
+
+Numeric: same as Decimal
+
+Float: represents floating-point numbers with decimals (e.g., 1.2321245, -0.0556).
+
+Boolean: represents true or false values (e.g., true, false).
+
+Char (character): stored fixed-length text (e.g., 'A', '5', '!').
+
+Varchar (variable character): stores variable-length text efficiently (e.g, “A”, “John”, “New York”,
+“Hello World”).
+
+Date: stores dates (e.g., "2023-09-01").
+
+We assign data types to columns in a table based on the logical context. The name of a person is
+usually a varchar as its values are variable-length sets of characters: “John”, “Elon”, “Alexa”, “Angela”.
+The age is an integer such as 5, 10, 25, etc. Similarly, using common knowledge, we may assume that the
+best data type for salary is decimal or numeric (e.g., 12.5 for hourly rate in US dollars).
+
+More data types:
+
+CREATE
+To create a table, we use a DDL statement CREATE. Creation of tables is one of the essential ways
+to not only create a table for your database, but also to create columns and assign them to data types.
+
+Syntax:
+
+CREATE TABLE table_name (
+
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+
+);
+
+Let’s take a look at the example where we create table Employee:
+
+CREATE TABLE Employee (
+
+  first_name VARCHAR(15),
+  last_name VARCHAR(25),
+  age INTEGER,
+  salary INTEGER
+
+);
+
+As you can see, we created a table Employee with 4 columns and corresponding data types.
+Notice how in this table we set character limits for first names (15) and last names (25).
+By doing so, we assume that all first names are not longer than 15 characters and last names are not
+longer than 25 characters.
+
+
+Such table works good for the following records:
+
+first_name | last_name | age | salary
+John | Doe | 25 | 80000
+Alex | Brown | 32 | 95000
+Angela | Wong | 45 | 140000
+Brittany | Joseph | 22 | 60000
+Here are a few more examples.
+
+CREATE TABLE Transaction (
+
+  transaction_id INTEGER,,
+  quantity INTEGER
+  amount NUMERIC (7,2),
+  transaction_date date
+);
+
+In this example, we created a transaction table that is designed to store records for online payments.
+In theory, such table may contain the following records:
+transaction_id | quantity | amount | transaction_date
+1 | 4 | 252.25 | 2022-12-01
+2 | 7 | 89.67 | 2023-01-10
+3 | 8 | 100 | 2023-05-07 | 4 | 1 | 20.50 | 2023-09-05
+=======================================================================================================
+20.6 SQL DML Update Statement
+
+Video lecture code:
+
+CREATE TABLE Employee (
+
+first_name TEXT,
+
+last_name TEXT,
+
+department TEXT,
+
+salary INTEGER(10, 2)
+
+);
+
+INSERT INTO Employee (first_name, last_name, department, salary)
+
+VALUES
+
+('Elon', 'Musk', 'CEO', 1000000.00),
+
+('Jeff', 'Bezos', 'CFO', 900000.50),
+
+('Mark', 'Zuckerberg', 'CTO', 850000.75),
+
+('Tim', 'Cook', 'VP of Sales', 800000.25),
+
+('Satya', 'Nadella', 'VP of Marketing', 750000.00);
+
+CREATE TABLE Client (
+
+first_name TEXT,
+
+last_name TEXT,
+
+email TEXT,
+
+phone_number TEXT,
+
+age INT
+
+);
+
+INSERT INTO Client (first_name, last_name, email, phone_number, age)
+
+VALUES
+
+('John', 'Doe', 'john@example.com', '+1 (123) 456-7890', 20),
+
+('Jane', 'Smith', 'jane@example.com', '+1 (987) 654-3210', 19),
+
+('Michael', 'Brown', 'michael@example.com', '+1 (555) 555-5555', 35),
+
+('Saiid', 'Kadyrkul', 'saiid@example.com', '+1 (777) 123-4567', 17),
+
+('Anton', 'Ivanov', 'anton@example.com', '+1 (888) 987-6543', 40);
+
+
+-- SQL Commands
+
+-- DML
+
+-- SELECT
+
+SELECT * FROM table_name;
+
+-- INSERT
+
+INSERT INTO table_name
+
+VALUES (value1, value2)
+
+-- UPDATE
+
+UPDATE table_name
+
+SET column1 = value1, column2 = value2, ...
+
+WHERE condition;
+
+-- DELETE
+
+DELETE FROM table_name WHERE condition;
+
+SQL  Commands
+
+DDL, DML, DCL, TCL
+
+Each command type is a 5-10 minute lecture
+
+In the previous lecture, we learned more about tables and how to create one. It’s time to dive into
+more practical examples and learn how to manipulate data. Let’s start with the concept of 4 main SQL
+commands: DDL, DML, DCL & TCL.
+
+Let’s start with the fun one - DML!
+
+DML
+
+DML stands for Data Modification Language. There are 4 statements that fall under the DML category:
+
+    SELECT
+
+    INSERT
+
+    UPDATE
+
+    DELETE
+
+DML commands, as suggested by the definition, are designed to manipulate data in the tables.
+
+SELECT
+
+We already learned how to use SELECT for data retrieval in the previous lectures. Here’s a quick recap.
+
+Syntax:
+
+SELECT * FROM table_name;
+
+Retrieve data for specific columns from table:
+SELECT column1, column2, column3 FROM table_name;
+
+Take a look at our example.
+
+SELECT * FROM Employee
+
+The query above returns data for all columns from table Employee.
+
+SELECT first_name, last_name FROM Employee
+
+The query above returns data for columns first_name and last_name from table Employee.
+
+INSERT
+
+To insert data into a table, use INSERT and follow the code below.
+
+Syntax:
+
+INSERT INTO table_name
+
+VALUES (value1, value2);
+
+Take a look at our example.
+
+INSERT INTO FROM Employee
+
+VALUES
+
+(‘Elon’, ‘Musk’, 52),
+
+(‘Bill’, ‘Gates’, 67)
+
+The query above inserts 2 rows into table Employee.
+
+To add values to only specific columns, simply specify the columns after the table name:
+
+INSERT INTO table_name (column1, column2, ...)
+
+VALUES (value1, value2, ...);
+
+Take a look at our example.
+
+INSERT INTO FROM Employee (first_name, last_name)
+
+VALUES
+
+(‘Elon’, ‘Musk’),
+
+(‘Bill’, ‘Gates’)
+
+The query above inserts 2 rows into table Employee for columns first_name and last_name.
+
+UPDATE
+
+To update data in a table, use UPDATE and follow the code below.
+
+UPDATE table_name
+
+SET column1 = value1, column2 = value2, ...
+
+WHERE condition;
+
+Take a look at our example.
+
+UPDATE Employee
+
+SET age = 18
+
+WHERE first_name = ‘John’’;
+
+The query above updates the row in table Employee that has the first name “John”.
+
+More examples:
+
+UPDATE Student
+
+SET grade = ‘A’
+
+WHERE last_name = ‘Musk’
+
+The query above updates the row in table Student that has the last name “Musk”.
+
+UPDATE Transaction
+
+SET amount = 1000’
+
+WHERE date = ‘2022-12-31’
+
+The query above updates the row in table Transaction that has the date value “2022-12-31”.
+
+To make an update to all records, do not specify conditions.
+
+UPDATE table_name
+
+SET column1 = value1, column2 = value2, …
+
+Take a look at our example.
+
+UPDATE Employee
+
+SET age = 0
+
+The query above updates all rows in table Employee: it sets age value to 0.
+
+DELETE
+
+To delete data in a table, use DELETE and follow the code below.
+
+Syntax:
+
+DELETE FROM table_name WHERE condition;
+
+Take a look at our example.
+
+DELETE FROM Employee WHERE last_name = ‘Smith’;
+
+The query deletes the row in table Employee that has the last name “Smith”.
+
+To delete all records, do not specify conditions.
+
+DELETE FROM table_name WHERE condition;
+
+Take a look at our example.
+
+DELETE FROM Employee;
+
+The query above deletes all rows in table Employee.
+====================================================================================================
+20.8 SQL DDL commands Alter Table Statement
+
+Video lecture code:
+
+-- SQL Commands
+
+-- DDL
+
+-- CREATE
+
+CREATE TABLE table_name (
+
+    column1 datatype,
+
+    column2 datatype,
+
+    column3 datatype,
+
+);
+
+-- ALTER
+
+ALTER TABLE table_name RENAME TO new_table_name
+
+ALTER TABLE table_name ADD COLUMN column1
+
+ALTER TABLE table_name RENAME COLUMN column1 to new_column1
+
+ALTER TABLE table_name DROP COLUMN column1
+
+-- DROP
+
+DROP TABLE table_name;
+
+--TRUNCATE
+
+TRUNCATE TABLE Employee;
+
+DDL
+
+DDL stands for Data Definition Language. There are 4 statements that fall under the DDL category:
+
+    CREATE
+
+    ALTER
+
+    DROP
+
+    TRUNCATE
+
+DDL commands are designed to define the database structure: creating, modifying and deleting objects.
+
+CREATE
+
+We already learned how to use CREATE for table creation in the previous lectures. Here’s a quick recap.
+
+Syntax:
+
+CREATE TABLE table_name (
+
+    column1 datatype,
+
+    column2 datatype,
+
+    column3 datatype,
+
+);
+
+Take a look at our example.
+
+
+CREATE TABLE Employee (
+
+  first_name VARCHAR(15),
+
+  last_name VARCHAR(25),
+
+  age INTEGER,
+
+salary INTEGER
+
+);
+
+The query above creates table Employee. The table includes columns first_name (VARCHAR(15)),
+last_name (VARCHAR(25)),  age (INTEGER), and salary (INTEGER).
+
+CREATE is also used for creation of other DB objects. Similar to tables,
+you can create a database itself.
+
+CREATE DATABASE database_name;
+
+
+Take a look at our example.
+
+
+CREATE DATABASE online_shop;
+
+
+The query above creates a brand new database.
+
+
+ALTER
+
+
+To make a change to a database object, use ALTER. For instance, you can “alter” a table in many
+different ways: rename it, add or drop a column, rename a column, and many more. The below code
+demonstrates the template for some of the common use cases.
+
+Syntax:
+
+ALTER TABLE table_name RENAME TO new_table_name
+
+ALTER TABLE table_name ADD COLUMN column1
+
+ALTER TABLE table_name RENAME COLUMN column1 to new_column1
+
+ALTER TABLE table_name DROP COLUMN column1
+
+Let’s take a look at a few examples:
+
+ALTER TABLE Person RENAME TO Employee
+
+The query above renames the table from “Person” to “Employee”.
+
+ALTER TABLE Employee ADD COLUMN hourly_wage NUMERIC(6,2)
+
+The query above adds the column “hourly_wage” column to table Employee.
+
+ALTER TABLE Employee RENAME COLUMN salary to compensation
+
+The query above renames the column from “salary” to “compensation”.
+
+ALTER TABLE DROP COLUMN hourly_wage
+
+The query above deletes the column hourly_wage from table Employee.
+
+As you can see, there are a few SQL keywords that are used along with ALTER to specify the actions
+we’re trying to make. ADD, DROP, and RENAME are used for corresponding table alterations.
+
+DROP
+
+To delete a database object, use DROP.
+
+Syntax:
+
+DROP TABLE table_name;
+
+Take a look at our example.
+
+DROP TABLE Employee;
+
+The query above deletes table Employee;
+
+CREATE is also used for deletion of other DB objects. Similar to tables, you can delete the database itself.
+
+DROP DATABASE database_name;
+
+Take a look at our example.
+
+DELETE DATABASE online_shop;
+
+The query above deletes the whole database “online_shop”. Keep in mind that all the tables that this
+database had, would be deleted.
+
+TRUNCATE
+
+To delete all records from a table, use TRUNCATE.
+
+Syntax:
+
+TRUNCATE TABLE table_name;
+
+Take a look at our example.
+
+TRUNCATE TABLE Employee;
+
+The query above deletes all records from table Employee;
+
+RENAME
+
+Depending on various sources of information, professionals from the SQL community include RENAME to DDL
+list as well. We demonstrated how RENAME works in combination with ALTER in the examples above.
+==================================================================================================
+20.9 DCL commands
+
+Video lecture code:
+
+-- SQL Commands
+
+-- DCL
+
+-- GRANT
+
+GRANT command ON table TO user;
+
+-- REVOKE
+
+REVOKE command ON table FROM user;
+
+DCL
+
+DCL stands for Data Control Language. There are 2 statements that fall under the DDL category:
+
+    GRANT
+
+    REVOKE
+
+DDL commands are designed to manage access permissions and security within a database.
+These commands allow administrators to control who can access and interact with data.
+
+GRANT
+
+To grant a privilege to a user for a specific table, use GRANT.
+
+Syntax:
+
+GRANT command ON table_name TO user;
+
+Example:
+
+GRANT SELECT, INSERT ON Employee TO Alice;
+
+The query above grants user Alice a privilege to use SELECT and INSERT statements on table Employee.
+
+REVOKE:
+
+To revoke a privilege from a user for a specific table, use REVOKE.
+
+Syntax:
+
+REVOKE command ON table_name FROM user;
+
+Example:
+
+REVOKE INSERT ON Employee FROM Alice;
+
+The query above revokes the privilege INSERT from user Alice on table Employee.
+
+In this course, we are not going to focus on DCL commands as much as DDL and DML.
+============================================================================================
+20.10 TCL commands
+
+TCL
+
+
+TCL stands for Transaction Control Language. There are a few key SQL statements that fall under
+this category such as COMMIT, ROLLBACK, SAVEPOINT, AUTOCOMMIT. Depending on various sources,
+there may be more statements in TCL. We will learn more about transactions and more advanced queries
+ later in this course.
+
+In SQLite, TCL (Transaction Control Language) commands are used to manage transactions.
+Here are some common TCL commands in SQLite with examples:
+
+BEGIN: Start a new transaction.
+
+This command begins a new transaction. All subsequent SQL statements are part of this transaction
+until you either commit or roll back the transaction.
+
+COMMIT: Save changes made during the current transaction and make them permanent.
+This command saves all changes made during the current transaction and makes them permanent.
+]It ends the transaction and makes the changes visible to other transactions.
+
+ROLLBACK: Undo changes made during the current transaction and discard them.
+This command undoes all changes made during the current transaction and discards them.
+It effectively cancels the transaction.
+
+SAVEPOINT: Create a savepoint within the current transaction.
+This command creates a savepoint within the current transaction, allowing you to later roll back to
+that savepoint instead of the entire transaction.
+
+ROLLBACK TO: Roll back to a specific savepoint within the current transaction.
+This command rolls back the transaction to a specific savepoint created earlier.
+It allows you to selectively undo changes made after that savepoint.
+
+RELEASE: Release a savepoint and make any changes since the savepoint permanent.
+This command releases a savepoint and makes any changes made after that savepoint permanent.
+It effectively ends the savepoint.
+
+BEGIN; -- Start a new transaction
+
+-- Insert some data
+
+INSERT INTO Employees (employee_id, employee_name) VALUES (1, 'John Doe');
+
+INSERT INTO Employees (employee_id, employee_name) VALUES (2, 'Jane Smith');
+
+-- Create a savepoint
+
+SAVEPOINT my_savepoint;
+
+-- Insert more data
+
+INSERT INTO Employees (employee_id, employee_name) VALUES (3, 'Michael Brown');
+
+-- Roll back to the savepoint, undoing the last insertion
+
+ROLLBACK TO my_savepoint;
+
+-- Insert different data
+
+INSERT INTO Employees (employee_id, employee_name) VALUES (4, 'Saiid Kadyrkul');
+
+-- Commit the transaction, making changes permanent
+
+COMMIT;
+=================================================================================================
+20.11 Arithmetic operators
+
+Video lecture code:
+
+CREATE TABLE Employee (
+
+first_name TEXT,
+
+last_name TEXT,
+
+department TEXT,
+
+salary INTEGER(10, 2)
+
+);
+
+INSERT INTO Employee (first_name, last_name, department, salary)
+
+VALUES
+
+('Elon', 'Musk', 'CEO', 1000000.00),
+
+('Jeff', 'Bezos', 'CFO', 900000.50),
+
+('Mark', 'Zuckerberg', 'CTO', 850000.75),
+
+('Tim', 'Cook', 'VP of Sales', 800000.25),
+
+('Satya', 'Nadella', 'VP of Marketing', 750000.00),
+
+('John', 'Doe', 'CTO', 750000.00);
+
+
+CREATE TABLE Client (
+
+first_name TEXT,
+
+last_name TEXT,
+
+email TEXT,
+
+phone_number TEXT,
+
+age INT
+
+);
+
+INSERT INTO Client (first_name, last_name, email, phone_number, age)
+
+VALUES
+
+('John', 'Doe', 'john@example.com', '+1 (123) 456-7890', 20),
+
+('Jane', 'Smith', 'jane@example.com', '+1 (987) 654-3210', 19),
+
+('Michael', 'Brown', 'michael@example.com', '+1 (555) 555-5555', 35),
+
+('Saiid', 'Kadyrkul', 'saiid@example.com', '+1 (777) 123-4567', 17),
+
+('Anton', 'Ivanov', 'anton@example.com', '+1 (888) 987-6543', 40),
+
+('John', 'Smith', 'johnsmith@example.com', '+1 (123) 623-7220', 20),
+
+('Josh', 'Miller', 'john@example.com', '+1 (123) 456-7890', 33);
+
+/*
+
+arithmetic operators:
+
++
+
+-
+
+*
+
+/
+
+%
+
+logical operators:
+
+AND
+
+OR
+
+NOT
+
+comparison operators:
+
+=
+
+<> or !=
+
+>
+
+<
+
+>=
+
+<=
+
+LIKE
+
+ORDER BY
+
+LIMIT
+
+*/
+
+Data Filtering
+    Logical operators
+
+    Range operators
+
+    Comparison operators
+
+    Wildcards (LIKE)
+
+    ORDER BY
+
+    LIMIT
+
+An Alias AS is a “temporary” (optional) name assigned to a table or column in SELECT queries.
+The AS keyword is used to assign an alias to a table or column.
+
+AS for tables:
+
+SELECT column1, column2 FROM table_name AS table_alias
+
+AS for columns:
+
+SELECT column1 AS column_pseudo FROM table_name
+
+Logical Operators in SQL are used to combine multiple conditions (using WHERE) to filter data more
+precisely. There are three logical operators:
+
+AND
+
+OR
+
+NOT
+
+The AND operator is used to combine two or more conditions in a WHERE clause. The result of the AND
+operator is true only if all conditions separated by the operator are true.
+
+SELECT * FROM table_name WHERE column1 = 'value1' AND column2 = 'value2'
+
+The OR operator is used to combine two or more conditions in a WHERE clause. The result of the
+OR operator is true if any of the conditions separated by the operator are true.
+
+SELECT * FROM table_name WHERE column1 = 'value1' OR column2 = 'value2'
+
+The NOT operator is used to cancel a condition in a WHERE clause. The result of the NOT operation is
+true if the condition it negates is false.
+
+SELECT * FROM table_name WHERE NOT column = 'value'
+
+
+Range Operators in SQL are used to filter data based on a range of values. There are two range operators:
+BETWEEN and IN
+
+
+The BETWEEN operator is used in combination with AND
+
+SELECT * FROM table_name
+
+WHERE column BETWEEN value1 AND value2
+
+Example:
+
+SELECT * FROM client WHERE age BETWEEN 20 AND 30;
+
+The IN operator is used to filter data based on a set of values
+
+SELECT * FROM table_name
+
+WHERE column IN (value1, value2, ...)
+
+Example:
+
+SELECT * FROM client WHERE age IN (27, 35, 40)
+
+Comparison operators are used to compare values in one or more columns of a table with a specified
+value or expression. These operators are used in filter conditions to select only those rows that
+match a specified condition. Typically used with WHERE.
+
+The = operator is used to test whether two values are equal.
+
+The <> or != “not equal” operator(s) is used to test whether two values are not equal.
+
+> The greater than operator is used to test whether a value is greater than another value.
+
+The < less than operator is used to test whether a value is less than another value.
+
+The >= greater than or equal to operator is used to test whether a value is greater than or equal to
+another value.
+
+<= The less than or equal operator is used to test whether a value is less than or equal to another value
+
+Filtering data is a common requirement when working with databases, and SQL provides several
+ways to filter data based on certain conditions. Two commonly used filtering methods are the LIKE
+operator and the (CLAUSE) LIMIT clause.
+
+The LIKE operator is used to match a “pattern” of a row with a specific column in a table.
+It is typically used to find specific values in a column that match a certain pattern/pattern.
+
+SELECT column1, column2, column3 FROM table_name
+
+WHERE column1 LIKE template_value;
+
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+There are two wildcards often used in conjunction with the LIKE operator: The percent sign % represents
+zero, one, or multiple characters. The underscore sign _ represents one, single character.
+
+The pattern value can include wildcards such as % , which matches any sequence of characters
+
+SELECT * FROM table_name WHERE column1 LIKE 'value%'
+
+Examples:
+
+SELECT * FROM client WHERE name LIKE 'jo%';
+
+SELECT * FROM client WHERE name LIKE '%hn';
+
+SELECT * FROM client WHERE name LIKE '%john%';
+
+The pattern value can include wildcards such as _, which matches any single character
+
+SELECT * FROM table_name WHERE column1 LIKE 'value__'
+
+Examples:
+
+SELECT * FROM client WHERE name LIKE 'jo__'
+
+The DISTINCT clause is used to retrieve only unique values for a specified column or set of columns.
+
+SELECT DISTINCT column FROM table_name
+
+Example:
+
+SELECT DISTINCT name FROM client
+
+We will learn more about different types of clauses and data filtering later in our course.
+
+The LIMIT clause (CLAUSE) is used to limit the number of rows returned by the SELECT statement.
+
+SELECT * FROM table_name LIMIT number;
+
+Example:
+
+SELECT * FROM client LIMIT 3
+
+ORDER BY clause
+
+ORDER BY is a clause that is used to sort the result of a query in ascending (ASC) or descending
+order (DESC) based on one or more columns.
+
+SELECT * FROM table_name ORDER BY column1 DESC
+
+Examples:
+
+SELECT * FROM client ORDER BY age DESC
+
+SELECT * FROM client ORDER BY age ASC
+
+SELECT * FROM client ORDER BY salary ASC, age DESC
+============================================================================================
+20.18 Relationship Theory
+
+Video lecture code:
+
+There are three types of relationships in relational databases:
+
+One-to-one (1:1)
+
+One-to-many (1:N)
+
+Many-to-many (N:N)
+
+Database Relationships
+
+As stated earlier, In relational databases, a relationship is a logical connection between two or more
+tables based on the values of defining columns. The relationships are usually established following a
+contextual logic.
+
+To understand the relationships between tables, think of how object A relates to object B. Or the other
+way around, how object B relates to object A. The relationships may be of different types depending on
+the context.
+
+There are three types of relationships in relational databases:
+
+One-to-one (1:1)
+
+One-to-many (1:N)
+
+Many-to-many (N:N)
+
+Let’s start by exploring the one-to-many (1:N) relationship.
+
+One-to-Many (1:N)
+
+This is the most common type of relationships and is used to represent hierarchies or lists of related
+data. In a one-to-many relationship, each record in table A can be related to one or more records in
+table B, but each record in table B is related to only one record in table A.
+
+–diagram_picture–
+
+For example, an "Campus" table can have a one-to-many relationship with a "Book" table, where one author
+can write multiple books, but each book has only one author.
+
+Many-to-Many (N:N)
+
+In a many-to-many relationship, each record in table A can be related to one or more records in table B,
+and vice versa.
+
+For example, a "Student" table can have a many-to-many relationship with a "Course" table. Think of
+the nature of such a relationship. If a student has many courses and a course has many students enrolled
+in itself, that means that there is a set of unique combinations. So, a student record John relates
+course records “Math”, “Chemistry”, and “Physics”, while student record Mitchell relates to course
+records “Math”, “Spanish”, and “History”. Meanwhile, the course record “Math” relates to not only
+student records John and Mitchel, but also Karina, and Britany. How do you store so much data in two tables?
+The answer is you don’t - you store it in three.
+
+The many-to-many relationship is implemented using an associative table (also called junction table or
+bridge table) in the center to manage the data. The associative table is the one that stores all unique
+combinations.
+
+–diagram_picture–
+
+Through a "Registration" junction table, students can be enrolled in multiple courses, and each course
+can have multiple students.
+
+One-to-One (1:1)
+
+In a one-to-one relationship, each record in table A is related to exactly one record in table B, and
+vice versa.
+
+For example, a database might have a "Person" table and a "Passport" table, where each person has one
+passport, and each passport is associated with only one person.
+
+–diagram_picture–
+
+This type of relationship is relatively rare because there is no practical need to create a separate table.
+Think of this way: if I don’t have to create a separate table for my first name and a separate one
+for my last name, why would I create it for my passport number? I only have one passport just like one
+first name and last name. Just put all columns in one table “Person” and call it a day. Simple!
+
+–diagram_picture–
+
+The relationship types help organize data and allow you to create flexible and normalized database designs.
+
+Note: normalization in databases is a process of organizing data implemented by breaking down large
+tables into smaller, related tables and establishing relationships between them. The primary goal of
+normalization is to reduce data redundancy and improve data integrity.
+
+In a database, we don't keep everything in one giant table like Excel. Instead, we split it into smaller
+tables that focus on specific types of information. One table for customer details, (names, emails),
+another for orders (what customers buy), and yet another for products (what's being sold). This way
+our queries run more efficiently (faster) and the organization is easier to follow for the users.
+This is what makes databases databases and not just excel spreadsheets on steroids.
+
+Normalization is a big topic in relational DBs and we highly recommend learning more about it online.
+
+In lecture 2, we learned that the relationships are established through the keys: Primary Key and
+Foreign Key.
+
+Primary Key
+
+A primary key (PK) is a column or set of columns in a table that uniquely identifies each row in that
+table. It serves as a unique identifier and ensures that no two rows have the same primary key values.
+Primary keys are used to ensure the integrity of objects and help maintain consistency and accuracy of
+ data in a database.
+
+They are also used as a reference for other tables whose foreign keys reference the current table's
+primary key. In most databases, primary keys are created using unique rather than null constraints
+on one or more columns in the table.
+
+Create a table without PK:
+
+CREATE TABLE client (
+
+  name VARCHAR(50) NOT NULL,
+
+  email VARCHAR(50) NOT NULL,
+
+  age INTEGER NOT NULL,
+
+  salary DECIMAL(10,2) NOT NULL,
+
+  hire_date DATE NOT NULL,
+
+  is_active BOOLEAN NOT NULL DEFAULT true
+
+);
+
+Create a table with PK:
+
+CREATE TABLE client (
+
+  client_id INTEGER PRIMARY KEY,
+
+  name VARCHAR(50) NOT NULL,
+
+  email VARCHAR(50) NOT NULL,
+
+  age INTEGER NOT NULL,
+
+  salary DECIMAL(10,2) NOT NULL,
+
+  hire_date DATE NOT NULL,
+
+  is_active BOOLEAN NOT NULL
+
+);
+
+SERIAL
+
+SERIAL is a pseudotype which generates a sequence counter making every record in a table unique.
+SERIAL is often used with a primary key, but this is not necessary.
+
+CREATE TABLE client (
+
+  client_id SERIAL PRIMARY KEY,
+
+  name VARCHAR(50) NOT NULL,
+
+  email VARCHAR(50) NOT NULL,
+
+  age INTEGER NOT NULL,
+
+  salary DECIMAL(10,2) NOT NULL,
+
+  hire_date DATE NOT NULL,
+
+  is_active BOOLEAN NOT NULL
+
+);
+
+In this example, whenever we make a new record for a client, the system automatically assigns a client
+ID number. This number is always one greater than the client ID of the previous record.
+
+Foreign Key
+
+A foreign key (FK) is a column or set of columns in a table that references a primary key (PK) of
+another table. It is used to create a connection (relationship) between two tables in a relational database.
+
+The purpose of using foreign keys is to ensure the integrity and consistency of data in related tables.
+By creating relationships between tables using a foreign key, we can ensure data accuracy and prevent
+the presence of “orphan” records.
+
+Take a look at the following example, where table client is related to table order through the primary
+and foreign keys:
+
+CREATE TABLE client (
+
+  client_id SERIAL PRIMARY KEY,
+
+  name VARCHAR(50) NOT NULL,
+
+  email VARCHAR(50) NOT NULL,
+
+  age INTEGER NOT NULL,
+
+  salary DECIMAL(10,2) NOT NULL,
+
+  hire_date DATE NOT NULL,
+
+  is_active BOOLEAN NOT NULL
+
+);
+
+CREATE TABLE order (
+
+  order_id SERIAL PRIMARY KEY,
+
+  client_id INTEGER NOT NULL,
+
+  order_date DATE NOT NULL,
+
+  total_amount DECIMAL(10,2) NOT      NULL,
+
+ FOREIGN KEY (client_id) REFERENCES client (client_id)
+
+);
+
+Primary key in table client client_id is referred by foreign key client_id in table order.
+
+The keys are supported by referential integrity.Imagine you have two tables: one for customers and one
+for orders. Referential integrity ensures that:
+
+The customer you're linking to actually exists in the customer table.
+
+You can't accidentally delete a customer if there are still orders linked to them.
+
+You can't insert an order that's linked to a customer that doesn't exist
+======================================================================================================
+20.22 SQL Joins
+
+Video lecture code:
+
+-- Create the Client table
+
+CREATE TABLE Client (
+
+client_id INTEGER,
+
+first_name TEXT,
+
+last_name TEXT,
+
+email TEXT,
+
+phone_number TEXT,
+
+age INTEGER
+
+);
+
+-- Insert records into the Client table
+
+INSERT INTO Client (client_id, first_name, last_name, email, phone_number, age)
+
+VALUES
+
+(1, 'John', 'Doe', 'john@example.com', '+1 (123) 456-7890', 20),
+
+(2, 'Jane', 'Smith', 'jane@example.com', '+1 (987) 654-3210', 19),
+
+(3, 'Michael', 'Brown', 'michael@example.com', '+1 (555) 555-5555', 35),
+
+(4, 'Saiid', 'Kadyrkul', 'saiid@example.com', '+1 (777) 123-4567', 17),
+
+(5, 'Anton', 'Ivanov', 'anton@example.com', '+1 (888) 987-6543', 40),
+
+(6, 'John', 'Smith', 'johnsmith@example.com', '+1 (123) 623-7220', 20),
+
+(7, 'Josh', 'Miller', 'john@example.com', '+1 (123) 456-7890', 33);
+
+-- Create the Order table
+
+CREATE TABLE 'Order' (
+
+order_id INTEGER,
+
+client_id INTEGER,
+
+order_date DATE,
+
+product_name TEXT,
+
+quantity INTEGER,
+
+total_price DECIMAL(10, 2)
+
+);
+
+-- Insert records into the Order table
+
+INSERT INTO 'Order' (order_id, client_id, order_date, product_name, quantity, total_price)
+
+VALUES
+
+(1, 1, '2023-01-15', 'Laptop', 2, 1500.00),
+
+(2, 2, '2023-02-10', 'Smartphone', 3, 1200.50),
+
+(3, 3, '2023-03-05', 'Tablet', 1, 600.75),
+
+(4, 4, '2023-04-20', 'Headphones', 4, 240.00),
+
+(5, 5, '2023-05-12', 'Camera', 1, 800.00);
+
+--LEFT JOIN returns all rows from the left table and matching rows from the right table,
+and also returns NULL for rows that have no matches in the right table.
+
+SELECT * FROM table A LEFT JOIN table B ON
+
+a.column1 = b.column1
+
+--RIGHT JOIN returns all rows from the right table and matching rows from the left table,
+and also returns NULL for rows that have no matches in the left table.
+
+SELECT * FROM table A RIGHT JOIN table B ON
+
+a.column1 = b.column1
+
+--FULL JOIN returns all rows from both tables and returns
+NULL for rows in either table that do not match in the other table.
+
+SELECT * FROM table A FULL JOIN table B ON
+a.column1 = b.column1
+
+--INNER JOIN returns only matching rows from both tables.
+
+SELECT * FROM table A INNER JOIN table B ON
+a.column1 = b.column1
+
+--CROSS JOIN returns all possibly combinations
+
+SELECT * FROM table A CROSS JOIN table B
+
+
+
+
