@@ -1,0 +1,53 @@
+23.5 Difference between http and https
+
+HTTP (Hypertext Transfer Protocol) and HTTPS (Hypertext Transfer Protocol Secure) are both protocols
+used for communication over the internet, but they differ primarily in terms of security.
+
+Here are the key differences between HTTP and HTTPS:
+
+    Security:
+
+        HTTP: It is the standard protocol for transmitting data over the internet. However, it is not
+        secure. Data transferred via HTTP is sent in plain text, which means that it can be intercepted
+        and read by malicious actors.
+
+        HTTPS: It is a secure version of HTTP. It uses encryption to protect the data being transmitted.
+        This encryption is typically provided by SSL (Secure Sockets Layer) or its successor,
+        TLS (Transport Layer Security). When you visit a website using HTTPS, the data exchanged between
+        your browser and the web server is encrypted, making it much more difficult for unauthorized
+        parties to intercept and decipher.
+
+    Data Integrity:
+
+        HTTP: It does not provide data integrity features, which means data can be altered or tampered
+        with during transmission without detection.
+
+        HTTPS: It includes data integrity checks. If any data is altered during transmission,
+        the receiving end will detect it and reject the compromised data.
+
+    Authentication:
+
+        HTTP: It does not provide a strong means of authenticating the server or website you're
+        connecting to. This lack of authentication can make userDomainForDataTables vulnerable to phishing attacks or
+         Man-in-the-Middle (MitM) attacks.
+
+        HTTPS: It uses digital certificates to authenticate the identity of the server or website you're
+        connecting to. This helps ensure that you're communicating with the legitimate website and not
+        an impostor.
+
+    Port:
+
+        HTTP typically uses port 80 for communication.
+
+        HTTPS typically uses port 443 for secure communication.
+
+    URL Scheme:
+
+        HTTP URLs begin with "http://."
+
+        HTTPS URLs begin with "https://."
+
+In summary, HTTPS is a more secure version of HTTP that provides encryption, data integrity, and
+authentication mechanisms to protect the privacy and security of data transmitted over the internet.
+In today's web environment, it is strongly recommended to use HTTPS for websites and applications to
+safeguard user data and maintain trust and security in online interactions.

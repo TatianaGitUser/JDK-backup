@@ -1,0 +1,82 @@
+22.17 How to troubleshoot unresponsive server
+
+When a Linux server becomes unresponsive, it can be a cause for concern. Troubleshooting such
+situations requires a systematic approach to diagnose and resolve the problem. Here are steps to follow
+when your Linux server is not responding:
+
+
+1. Check Network Connectivity:
+
+    Ensure that the server is still connected to the network.
+
+    Check for network issues, such as cable connections, router or switch problems, and network
+    service availability.
+
+2. Physical Access:
+
+    If possible, access the server physically to check its status.
+
+    Check for any hardware issues, including power supply, overheating, or malfunctioning components.
+
+3. Remote Access:
+
+    If you have remote access to the server (e.g., through SSH), try connecting to it.
+
+    If you can connect but the server is slow or unresponsive, proceed to diagnose software issues.
+
+4. Monitor Resources:
+
+    Use system monitoring tools like top, htop, or sar to check CPU, memory, and disk usage.
+
+    Look for any resource-hungry processes that may be causing the unresponsiveness.
+
+5. Review Logs:
+
+    Examine system logs, such as /var/log/messages, /var/log/syslog, or application-specific logs,
+    for any error messages or warnings that might provide clues.
+
+6. Test Disk Space:
+
+    Ensure there is enough free disk space on the server. A full disk can lead to unresponsiveness.
+
+    Use the df command to check disk space.
+
+7. Examine Running Processes:
+
+    List running processes using the ps or top command to identify any stuck or resource-intensive
+    processes.
+
+    You can use the kill command to terminate problematic processes.
+
+8. Check for Memory Issues:
+
+    Use the free command to check memory usage.
+
+    Consider checking for memory leaks in running processes.
+
+9. Network Issues:
+
+    Check the server's network configuration.
+
+    Verify DNS and routing settings.
+
+    Use the ping command to check network connectivity to external resources.
+
+10. Firewall and Security: - If you're using a firewall, check for misconfigurations that might be
+blocking connections. - Investigate possible security incidents, such as DDoS attacks.
+
+11. Reboot the Server: - If you've tried all the above steps and still cannot resolve the issue,
+consider rebooting the server as a last resort. This may help if the problem is related to temporary
+software issues.
+
+12. Contact Support: - If you are still unable to resolve the issue or suspect a hardware problem,
+contact your hosting provider or hardware support for assistance.
+
+13. Preventive Measures: - Implement monitoring and alerting tools to proactively detect and address
+issues before they cause server unresponsiveness. - Regularly update and patch your server to address
+software vulnerabilities. - Implement redundancy and backup solutions to ensure server availability.
+
+Remember to document your actions and observations as you troubleshoot.
+This information can be valuable in case you need to seek external help or review the incident
+in the future. Additionally, it's essential to have a plan for disaster recovery and server
+maintenance to minimize downtime and data loss in the event of a server failure.

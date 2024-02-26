@@ -1,0 +1,103 @@
+24.1 What is RestAssured library
+
+"Given-When-Then" is a common structure used in behavior-driven development (BDD) and testing
+frameworks like RestAssured for describing and organizing test scenarios. It provides a clear structure
+for writing test cases for RESTful API testing. Here's what each part means:
+
+    Given: This section sets up the preconditions or context for your test. It typically includes
+    information about the API request, such as the base URL, query parameters, headers,
+     authentication. It defines the initial state or environment in which your test will operate.
+
+    Example:
+
+    given() .baseUri("https://api.example.com") .header("Authorization", "Bearer YOUR_TOKEN")
+
+
+    When: This section describes the action that triggers the API request. It typically contains the
+    HTTP method (GET, POST, PUT, DELETE, etc.) and the specific endpoint or resource you want to interact
+    with.
+
+    Example:
+
+    when() .get("/api/resource/123")
+
+
+    Then: In this section, you define the expected outcomes and assertions for the response. You
+    can check the HTTP status code, response headers, and the response body using various methods
+    provided by RestAssured.
+
+    Example:
+
+    then() .statusCode(200) .body("name", equalTo("John Doe"))
+
+
+Here's a complete example:
+
+given().baseUri("https://api.example.com").header("Authorization",
+"Bearer YOUR_TOKEN")when().get("/api/resource/123")then().statusCode(200)
+
+
+In this example:
+
+    "Given" sets up the base URL and authentication headers.
+
+    "When" specifies the action, which is a GET request to a specific API endpoint.
+
+    "Then" contains assertions, checking that the response has a 200 status code and the "name"
+    field in the response body is equal to "John Doe."
+
+The "Given-When-Then" structure makes your API tests more readable and maintainable by clearly
+separating the setup, action, and verification parts of your test cases. It also helps in collaboration
+between testers, developers, and other stakeholders by providing a common language for defining test
+scenarios.
+
+
+
+Here are the top three REST API testing libraries (drivers) for each of the requested programming
+languages, starting with Java:
+
+Java:
+
+    RestAssured: RestAssured is a Java library specifically designed for REST API testing.
+    It provides a fluent and expressive syntax for making API requests, validating responses,
+    and performing various assertions. It is highly popular and widely used for API testing in Java.
+
+    JUnit with RestAssured: While JUnit is primarily a testing framework, it can be used in
+    combination with RestAssured to perform REST API testing. You can create test cases in JUnit and
+    use RestAssured for making HTTP requests and assertions, making it a versatile choice for API testing.
+
+    Karate: Karate is an open-source testing framework that combines API testing and behavior-driven
+    development (BDD). It provides a unique syntax for writing API tests and is designed to be readable
+    and expressive.
+
+Python:
+
+    Requests: Requests is a widely-used Python library for making HTTP requests, and it is often used
+    for API testing. While not a testing-specific library, it provides a straightforward way to interact
+    with REST APIs and validate responses.
+
+    pytest with requests: You can use the popular pytest testing framework in Python along with the
+    Requests library to create and run API tests. This combination allows you to write API test cases
+    and assertions in a clear and concise manner.
+
+    httpx: httpx is a modern asynchronous HTTP client for Python, and it can be used for API testing in
+    asynchronous applications. It supports HTTP/1.1 and HTTP/2 and is designed for high performance.
+
+JavaScript (Node.js):
+
+    Mocha with Chai: Mocha is a popular JavaScript testing framework, and Chai is an assertion library.
+    When combined, they provide a powerful combination for testing REST APIs in Node.js. Mocha provides
+    the testing framework, and Chai offers expressive assertions for validating API responses.
+
+    Jest: Jest is a widely-used JavaScript testing framework, primarily known for testing JavaScript
+    applications. However, it can also be used for API testing by making HTTP requests and validating
+    responses. Jest provides a testing framework, and you can use libraries like axios or fetch for
+    making requests.
+
+    SuperTest: SuperTest is a popular library for testing REST APIs in Node.js. It provides a high-level
+    API for making HTTP requests and making assertions on the responses. SuperTest is often used for
+    API testing and integration testing in Node.js applications.
+
+These libraries and combinations are commonly used for REST API testing in their respective programming
+languages. Your choice may depend on your specific project requirements and your team's familiarity with
+the tools.

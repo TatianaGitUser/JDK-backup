@@ -1,0 +1,344 @@
+22.18 What is Docker
+
+Docker is a platform for developing, shipping, and running applications in containers.
+Containers are lightweight, portable, and self-sufficient environments that can contain an application
+and all its dependencies, including libraries, runtime, and system tools. Docker has become widely
+popular for its ability to simplify the process of packaging, distributing, and managing applications,
+making it easier to develop, deploy, and scale applications in various computing environments, such as
+development machines, testing environments, and production servers.
+
+Key components and concepts of Docker include:
+
+    Docker Engine: This is the core of Docker. It is a runtime that enables containers to run on a host
+    system. Docker Engine includes a server, an API, and a command-line interface (CLI) that developers
+    use to interact with Docker.
+
+    Docker Container: A container is an isolated, executable environment that includes an application
+    and its dependencies. Containers are built from container images, which are read-only snapshots of a
+    filesystem, and they can run consistently across different environments.
+
+    Docker Image: An image is a lightweight, stand-alone, and executable package that includes
+    everything needed to run an application, including the code, runtime, libraries, and system tools.
+    Images are used to create containers.
+
+    Dockerfile: A Dockerfile is a text file that contains instructions for building a Docker image.
+    It specifies the base image, environment variables, and other configurations needed for the application.
+
+    Docker Registry: A registry is a repository for Docker images. Docker Hub is a popular public registry,
+    but organizations can also set up their private registries for storing and sharing custom images.
+
+    Docker Compose: Docker Compose is a tool for defining and running multi-container Docker applications.
+    It allows you to describe a multi-container application in a single YAML file, making it easier to
+    manage complex setups.
+
+    Docker Swarm and Kubernetes: These are container orchestration tools that help manage and scale
+    containers across multiple hosts in a cluster. They offer features like load balancing,
+    automated scaling, and high availability.
+
+Docker simplifies the development and deployment process by providing a consistent environment for
+applications, reducing "it works on my machine" issues. It also enables developers to package
+applications and their dependencies into containers, making it easier to move them between different
+environments, such as development, testing, and production, with minimal differences.
+
+Please note that since my knowledge is based on information available up to September 2021, there may
+have been developments or changes in the Docker ecosystem since then.
+====================================================================================================
+22.21 How to pull an image in Docker?
+
+Docker provides a powerful command-line interface (CLI) for interacting with the Docker Engine.
+Below, I'll provide a tutorial on some of the most commonly used Docker commands to help you get started.
+Please note that you should have Docker installed on your system before using these commands.
+Also, be sure to run Docker commands with appropriate permissions, which typically require administrative
+or root access.
+
+ Checking Docker Version: To verify that Docker is installed and check its version, you can use the
+ following command:
+
+ docker --version
+
+  Getting Started with Containers:
+
+  Pull an Image: You can pull a Docker image from a registry, like Docker Hub, using the docker
+ pull command. For example, to pull the official Ubuntu image, you can run:
+
+docker pull digitalbank
+
+ Run a Container: To run a container from an image, use the docker run command. For instance,
+to start a basic Ubuntu container, run:
+
+docker run -it digitalbank
+
+This command runs an interactive (-i) terminal (-t) session inside the Ubuntu container.
+
+ List Running Containers: To see a list of running containers, use:
+
+docker ps
+
+List All Containers: To list all containers, including stopped ones, use:
+
+ docker ps -a
+===================================================================================================
+ 22.22 How to create a container and run it
+
+ To create a Docker container without starting it (i.e., in a stopped state), you can use the docker
+ create command. The docker create command is similar to docker run, but it only creates the container
+ and prepares it for running, leaving it in a stopped state. Here's how to do it:
+
+Create a Docker Container:
+
+  Use the docker create command to create a container from an image. The basic syntax is:
+
+ docker create [OPTIONS] imageid
+
+
+Replace imageid with the id of the image you want to use and tag with the specific version or tag you
+want to create the container from.
+
+For example, to create a stopped container from the official Ubuntu image, you can use the following
+command:
+
+docker create -it 4e37ca6dbc4a
+
+
+ The -i flag makes the container interactive.
+
+ The -t flag allocates a terminal.
+
+View the Container ID:
+
+ After running the docker create command, Docker will return the container's unique ID. Make a note of
+ this ID as you'll need it to start, stop, or manage the container later.
+
+ The above approach is going to create a random name for your container to name your container use the
+ following command:
+
+ docker create -it --name dbank imageid
+
+Start the Container (Optional):
+
+To start the container you created in the previous step, use the docker start command and provide the
+container's ID or name:
+
+docker start container_id
+
+
+ Replace container_id with the ID of the container you created. If you don't specify a container ID,
+ Docker will start all stopped containers.
+
+ For example:
+
+docker start abc123def456
+
+
+If you don't start the container immediately after creating it, it will remain in a stopped state until
+you explicitly start it using the docker start command.
+
+Creating containers without running them can be useful in scenarios where you want to prepare a
+container configuration but not start the application within it immediately. This allows you to have a
+container ready for future use or for further configuration.
+
+Creating a Docker container from a Docker image is a fundamental step in using Docker. You can create
+and start a container from an image by using the docker run command. Here are the basic steps to create
+ a container from a Docker image:
+
+Pull the Docker Image (if not already pulled):
+
+ If the Docker image you want to use is not already available on your system, you can pull it from a
+ registry like Docker Hub using the docker pull command. For example:
+
+ docker pull image_name:tag
+ Replace image_name with the name of the Docker image and tag with the specific version or tag you want
+ to pull.
+
+ Create and Start a Container:
+ Use the docker run command to create and start a container from the image. The basic syntax is:
+
+docker run [OPTIONS] image_name:tag
+Replace image_name with the name of the image and tag with the specific version or tag you want to use.
+You can also specify additional options to configure the container's behavior.
+
+For example, to create and start a simple container from the official Ubuntu image and run an
+interactive shell within it, you can use the following command:
+ docker run -it ubuntu:20.04
+
+ The -i flag makes the container interactive.
+The -t flag allocates a terminal.
+ ubuntu:20.04 specifies the image and tag.
+
+Interact with the Container:
+
+ After running the docker run command, you will be inside the container's environment. You can interact
+ with the container as needed, depending on the image you're using. In the case of the Ubuntu image,
+ you'll have a shell prompt where you can execute commands.
+
+ Exit the Container:
+
+ To exit the container and return to your host machine's command prompt, you can use the exit command
+ or press Ctrl + D or Ctrl + C, depending on the shell you are using.
+
+If you want to keep the container running in the background, you can use the docker run command with
+the -d flag to run it in detached mode. For example:
+
+ docker run -d ubuntu:20.04
+This basic process allows you to create and start a container from a Docker image.
+You can customize the container's configuration by providing additional options to the docker run
+command, depending on your specific use case.
+======================================================================================================
+22.24 How to enter a docker container and change app configs
+
+To enter a Docker container and access its shell or command-line interface, you can use the docker exec
+command. This command allows you to run commands inside a running container. Here's how you can enter a
+Docker container:
+
+Assuming you have a running container, use the following command to enter it:
+
+docker exec -it container_name_or_id /bin/bash
+
+
+    -it: This option allows you to interact with the container by allocating a terminal (-t) and running
+    it interactively (-i).
+
+    container_name_or_id: Replace this with the name or ID of the running container.
+
+    /bin/bash: This is the shell you want to run inside the container. For an Ubuntu-based image,
+    you can use /bin/bash. For other images, use the appropriate shell (e.g., /bin/sh, /bin/ash, etc.).
+
+
+For example, to enter a running container named "my_container" with an Ubuntu-based image, you would use:
+
+docker exec -it my_container /bin/bash
+
+
+After executing this command, you will be inside the container, and you can run commands as if you
+were working on a separate server or machine. When you are done, you can exit the container by typing
+exit. This will return you to your host machine's command prompt.
+
+Please note that this method assumes the container has a shell or command-line interface available.
+Some containers may use different shells or may not have a shell at all. You should refer to the
+documentation or specifications of the specific Docker image for details on how to interact with it.
+
+
+
+How to edit a file inside docker container?
+
+Once you are logged into the docker container the first thing which you need to do is to update the
+package manager so that it will have all the latest repository URLs updated.
+
+Run the following command to update the package manager -
+
+# For Ubuntu
+apt-get update
+
+4. Install the required package vi, nano, vim etc.
+
+Now after updating the package repository you can install your favorite editor (vi, nano, vim)
+inside your docker container so that you can edit the file.
+
+Here is the command for installing the editor -
+
+# For Ubuntu
+apt-get install vim
+
+5. Edit the file using either vim or nano
+
+Finally, you can use the command vim digitalbank.properties to edit/update your file present inside
+the running docker container.
+====================================================================================================
+22.25 How to read logs of Docker apps
+
+To read log files in a Docker container, you can use various methods, depending on how the container's
+logging is configured. Here are some common ways to access and read log files within a Docker container:
+
+    Using docker logs Command: Docker provides a convenient command called docker logs to retrieve the
+    logs of a running container. This is the simplest and most common way to view container logs.
+    Here's how to use it:
+
+    docker logs container_name_or_id
+
+
+    Replace container_name_or_id with the name or ID of the running container. This command will
+    display the container's logs in your terminal.
+
+    For example:
+
+    docker logs my_container
+
+
+    Accessing Log Files Directly: In some cases, you may need to access log files directly inside the
+    container. To do this, you can use the docker exec command to enter the container,
+    navigate to the log directory, and read the log files with your preferred text editor or viewer.
+    For instance:
+
+    docker exec -it container_name_or_id /bin/bash
+    cd /var/log
+    more your_log_file.log
+
+
+    Replace container_name_or_id with the name or ID of the running container and your_log_file.log with
+    the name of the log file you want to read. Use the appropriate shell or commands based on the
+    container's OS and log file location.
+
+
+    Using Volume Mounts: If the container is configured with a volume mount that allows log files to
+    be written to the host system, you can read the logs directly from the host. Locate the directory
+    where the logs are written on the host and use your preferred text editor or viewer to read them.
+
+    Using Third-Party Log Management Tools: For more advanced log management and analysis, you can
+    integrate third-party log management and monitoring tools like ELK Stack, Fluentd, Splunk,
+    or Graylog with Docker. These tools can collect and centralize container logs, providing advanced
+    searching, filtering, and visualization capabilities.
+
+The method you choose for reading log files in a Docker container depends on the container's
+configuration and your specific requirements. In most cases, using docker logs is the easiest way
+to access container logs, but if you need more granular control, you can access the logs directly
+from within the container or use volume mounts to access logs on the host system.
+====================================================================================================
+22.26 How to pull a newer version of the app image in Docker
+
+To pull the newer version of a Docker image, you can use the docker pull command with the image's name
+and optionally specify the new version or tag. If you don't specify a version or tag, Docker will
+automatically pull the latest version.
+
+Here's how to pull a newer version of an image:
+
+    Pull the Latest Version:
+
+    If you want to pull the latest version of an image, you can simply use the image name without
+    specifying a tag. For example:
+
+    docker pull image_name
+
+
+    Replace image_name with the actual name of the Docker image.
+
+    Pull a Specific Version or Tag:
+
+    To pull a specific version or tag of an image, you can specify it with a colon. For example:
+
+    docker pull image_name:tag
+
+
+    Replace image_name with the name of the image and tag with the specific version or tag you want
+    to pull. For instance:
+
+    docker pull ubuntu:20.04
+
+    This command will pull the "ubuntu" image with the "20.04" tag.
+
+    Check for Available Versions or Tags:
+
+    To see the available versions or tags of an image, you can visit the Docker Hub website
+    (or the registry where the image is hosted) and search for the image. It will list all the
+    available tags, including the latest one.
+
+    Alternatively, you can use the docker search command to look for images on Docker Hub and see
+    their available tags:
+
+    docker search image_name
+
+
+    Replace image_name with the name of the image you want to search for. This will display a list of
+    images and their tags from Docker Hub.
+
+By following these steps, you can easily pull the newer version or tag of a Docker image as needed for
+your containers.
