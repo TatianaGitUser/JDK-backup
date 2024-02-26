@@ -1,4 +1,5 @@
 @Deposit
+  @Smoke
 Feature: Positive case deposit
   Scenario: Customer deposits money to his checking account
     Given the user navigates to deposit page in digital bank

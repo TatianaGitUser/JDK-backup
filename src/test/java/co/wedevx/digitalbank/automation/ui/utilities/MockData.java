@@ -3,10 +3,7 @@ package co.wedevx.digitalbank.automation.ui.utilities;
 import com.github.javafaker.Faker;
 import com.github.javafaker.service.FakeValuesService;
 import com.github.javafaker.service.RandomService;
-import io.cucumber.java.it.Ma;
 
-import javax.xml.namespace.QName;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 

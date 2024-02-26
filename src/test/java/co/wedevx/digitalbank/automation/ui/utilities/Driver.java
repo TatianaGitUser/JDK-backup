@@ -2,39 +2,44 @@ package co.wedevx.digitalbank.automation.ui.utilities;
 
 import io.cucumber.java.Scenario;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertEquals;
+
 public class Driver {
     private static WebDriver driver;
-    private Driver(){
+
+    private Driver() {
 
     }
-    public static WebDriver getDriver(){
+
+    public static WebDriver getDriver() {
 
 
-        if(driver == null) {
+        if (driver == null) {
             String browser = ConfigReader.getPropertiesValeu("digitalbank.browser");
             String jenkinsHome = System.getenv("JENKINS_HOME");
 
             if (jenkinsHome != null && !jenkinsHome.isEmpty()) {
 
-                System.out.println("Running on Jenkins");
-
-                WebDriverManager.chromedriver().setup();
+                WebDriverManager.chromedriver().version("117.0.5938.149").setup();
                 ChromeOptions options1 = new ChromeOptions();
                 options1.addArguments("--window-size=1920,1080");
                 options1.addArguments("--disable-extensions");
@@ -72,6 +77,12 @@ public class Driver {
                         options.addArguments("--headless");
                         driver = new ChromeDriver(options);
                         break;
+                    case "saucelabs":
+                        String platform = ConfigReader.getPropertiesValeu("dbank.saucelabs.platform");
+                        browser = ConfigReader.getPropertiesValeu("dbank.saucelabs.browser");
+                        String browserVersion = ConfigReader.getPropertiesValeu("dbank.saucelabs.browser.version");
+                        driver = loadSauceLabs(platform, browser, browserVersion);
+                        break;
                     case "firefox":
                     default:
                         WebDriverManager.firefoxdriver().setup();
@@ -84,13 +95,14 @@ public class Driver {
         driver.manage().window().maximize();
         return driver;
     }
-public static void takeScreenShot (Scenario scenario){
-        if(scenario.isFailed()){
-            final byte[] screenshot = ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+
+    public static void takeScreenShot(Scenario scenario) {
+        if (scenario.isFailed()) {
+            final byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
 //            adding the screenShot to report
             scenario.attach(screenshot, "image/png", "screenshot");
         }
-}
+    }
 
     public static void takeScreenShotToFolder(Scenario scenario) {
         if (scenario.isFailed()) {
@@ -122,10 +134,34 @@ public static void takeScreenShot (Scenario scenario){
         }
     }
 
-    public static void closeDriver(){
-        if(driver != null){
+    public static void closeDriver() {
+        if (driver != null) {
             driver.quit();
             driver = null;
         }
+    }
+
+    private static WebDriver loadSauceLabs(String platform, String browserType, String browserVersion) {
+//        WebDriverManager.chromedriver().setup();
+//        how to use sauce labs?:
+//        first get username and password
+        String USERNAME = ConfigReader.getPropertiesValeu("dbank.saucelabs.username");
+        String ACCESS_KEY = "a87e285e-b119-4b53-82a9-572e10f629e5";
+        String HOST = ConfigReader.getPropertiesValeu("dbank.saucelabs.host");
+// setup URL to the hub which is running on sauce labs VMs.
+        String url = "https://" + USERNAME + ":" + ACCESS_KEY + "@" + HOST;
+
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        capabilities.setCapability("platformName", platform);  //uses Enum
+        capabilities.setCapability("browserName", browserType);
+        capabilities.setCapability("browserVersion", browserVersion);
+
+        WebDriver driver = null;
+        try {
+            driver = new RemoteWebDriver(new URL(url), capabilities);
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        return driver;
     }
 }

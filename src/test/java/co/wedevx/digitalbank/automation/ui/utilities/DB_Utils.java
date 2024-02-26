@@ -13,7 +13,7 @@ public class DB_Utils {
     private static Connection connection = null;
     private static Statement statement = null;
     private static ResultSet resultSet = null;
-    public static void establishConnection (){
+    public static void establishConnection () throws SQLException {
 //
 //        String url = "jdbc:mysql://3.249.240.23:3306/tetianac556";
 //        String username = "tetianac556";
@@ -24,7 +24,9 @@ public class DB_Utils {
                     getPropertiesValeu("digitalbank.db.username"),
                     getPropertiesValeu("digitalbank.db.password"));
         } catch (ClassNotFoundException | SQLException e) {
+            System.err.println("Unable to establish connection");
             e.printStackTrace();
+            throw new SQLException("Unable to establish DB connection");
         }
 
     }

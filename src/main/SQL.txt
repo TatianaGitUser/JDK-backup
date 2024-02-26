@@ -1330,7 +1330,7 @@ normalization is to reduce data redundancy and improve data integrity.
 In a database, we don't keep everything in one giant table like Excel. Instead, we split it into smaller
 tables that focus on specific types of information. One table for customer details, (names, emails),
 another for orders (what customers buy), and yet another for products (what's being sold). This way
-our queries run more efficiently (faster) and the organization is easier to follow for the users.
+our queries run more efficiently (faster) and the organization is easier to follow for the userDomainForDataTables.
 This is what makes databases databases and not just excel spreadsheets on steroids.
 
 Normalization is a big topic in relational DBs and we highly recommend learning more about it online.
